@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Table(name = "User")
@@ -17,6 +18,9 @@ public class UserModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idUser;
+
+	@OneToOne(mappedBy = "idCIty")
+	private CityModel city;
 
 	@Column(name = "nom", nullable = false, unique = false)
 	private String nom;
@@ -35,6 +39,12 @@ public class UserModel {
 
 	@Column(name = "mdp", nullable = false, unique = false)
 	private String mdp;
+
+	@Column(name = "permis", nullable = false, unique = false)
+	private String numeroPermis;
+
+	@Column(name = "tel", nullable = false, unique = false)
+	private String numeroTel;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idMessage")
@@ -66,6 +76,14 @@ public class UserModel {
 
 	public void setIdUser(long idUser) {
 		this.idUser = idUser;
+	}
+
+	public CityModel getCity() {
+		return city;
+	}
+
+	public void setCity(CityModel city) {
+		this.city = city;
 	}
 
 	public String getNom() {
@@ -114,6 +132,22 @@ public class UserModel {
 
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
+	}
+
+	public String getNumeroPermis() {
+		return numeroPermis;
+	}
+
+	public void setNumeroPermis(String numeroPermis) {
+		this.numeroPermis = numeroPermis;
+	}
+
+	public String getNumeroTel() {
+		return numeroTel;
+	}
+
+	public void setNumeroTel(String numeroTel) {
+		this.numeroTel = numeroTel;
 	}
 
 	public UserModel(String nom, String prenom, String addresse, String mail, String mdp, String rib) {
