@@ -2,16 +2,14 @@ package com.epsi.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = { "/login" })
-public class LoginController {
+@RequestMapping(value = { "/home" })
+public class HomeController {
 
 	/**
 	 * Methode get du controller
@@ -23,13 +21,6 @@ public class LoginController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView startup(HttpServletRequest request) {
 
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
-
-		if (currentPrincipalName != "anonymousUser") {
-			return new ModelAndView("redirect:/projet");
-		}
-
-		return new ModelAndView("login");
+		return new ModelAndView("home");
 	}
 }
