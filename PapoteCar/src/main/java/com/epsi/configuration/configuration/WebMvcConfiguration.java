@@ -1,12 +1,12 @@
 package com.epsi.configuration.configuration;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  * Fichier de configuration Spring MVC.
@@ -15,18 +15,9 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  *
  */
 @Configuration
+@ComponentScan(basePackages = { "com.epsi.controller" })
 @EnableWebMvc
 public class WebMvcConfiguration implements WebMvcConfigurer {
-
-	/**
-	 * Gestionnaire de l'emplacement des fichiers JSP.
-	 * 
-	 * @return
-	 */
-	@Bean
-	public InternalResourceViewResolver internalResourceViewResolver() {
-		return new InternalResourceViewResolver("/WEB-INF/pages/", ".jsp");
-	}
 
 	/**
 	 * Gestionnaire de l'emplacement des fichiers ressources.
