@@ -6,6 +6,7 @@ import javax.servlet.ServletRegistration;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -21,6 +22,7 @@ import com.epsi.configuration.configuration.WebMvcConfiguration;
 
 @SpringBootApplication
 @Import({ SpringFrontConfiguration.class })
+@EntityScan(basePackages = { "com.epsi.model" })
 public class PapoteCarApplication extends SpringBootServletInitializer implements WebApplicationInitializer {
 
 	/**

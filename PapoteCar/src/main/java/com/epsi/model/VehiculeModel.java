@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Table(name = "Vehicule")
@@ -31,7 +31,7 @@ public class VehiculeModel {
 	@Column(name = "nbrPlace", nullable = false, unique = false)
 	private String nbrPlace;
 
-	@OneToMany(mappedBy = "idUser")
+	@OneToOne(mappedBy = "vehicule")
 	private UserModel user;
 
 	public UserModel getUser() {

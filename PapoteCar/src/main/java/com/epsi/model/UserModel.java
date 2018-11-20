@@ -1,5 +1,7 @@
 package com.epsi.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -19,17 +22,17 @@ public class UserModel {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idUser;
 
-	@OneToOne(mappedBy = "idCIty")
-	private CityModel city;
-
 	@Column(name = "nom", nullable = false, unique = false)
 	private String nom;
 
 	@Column(name = "prenom", nullable = false, unique = false)
 	private String prenom;
 
-	@Column(name = "addresse", nullable = false, unique = false)
+	@Column(name = "adresse", nullable = false, unique = false)
 	private String addresse;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private CityModel city;
 
 	@Column(name = "rib", nullable = false, unique = false)
 	private String rib;
@@ -48,25 +51,28 @@ public class UserModel {
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idMessage")
-	private MessageModel messageId;
+	private List<MessageModel> messageId;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idEvaluation")
-	private EvaluationModel evalId;
+	private List<EvaluationModel> evalId;
 
-	public MessageModel getMessageId() {
+	@OneToOne
+	private VehiculeModel vehicule;
+
+	public List<MessageModel> getMessageId() {
 		return messageId;
 	}
 
-	public void setMessageId(MessageModel messageId) {
+	public void setMessageId(List<MessageModel> messageId) {
 		this.messageId = messageId;
 	}
 
-	public EvaluationModel getEvalId() {
+	public List<EvaluationModel> getEvalId() {
 		return evalId;
 	}
 
-	public void setEvalId(EvaluationModel evalId) {
+	public void setEvalId(List<EvaluationModel> evalId) {
 		this.evalId = evalId;
 	}
 
@@ -148,6 +154,14 @@ public class UserModel {
 
 	public void setNumeroTel(String numeroTel) {
 		this.numeroTel = numeroTel;
+	}
+
+	public VehiculeModel getVehicule() {
+		return vehicule;
+	}
+
+	public void setVehicule(VehiculeModel vehicule) {
+		this.vehicule = vehicule;
 	}
 
 	public UserModel(String nom, String prenom, String addresse, String mail, String mdp, String rib) {

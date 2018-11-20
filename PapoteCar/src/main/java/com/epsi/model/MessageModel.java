@@ -1,11 +1,12 @@
 package com.epsi.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name = "Message")
@@ -19,11 +20,11 @@ public class MessageModel {
 	@Column(name = "message", nullable = false, unique = false)
 	private String message;
 
-	@OneToOne(mappedBy = "idUser")
+	@ManyToOne(cascade = CascadeType.ALL)
 	private UserModel userId;
 
-	@OneToOne(mappedBy = "idTrajet")
-	private TrajetModel trajetId;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private TrajetModel trajet;
 
 	public long getIdMessage() {
 		return idMessage;
@@ -49,12 +50,12 @@ public class MessageModel {
 		this.userId = userId;
 	}
 
-	public TrajetModel getTrajetId() {
-		return trajetId;
+	public TrajetModel getTrajet() {
+		return trajet;
 	}
 
-	public void setTrajetId(TrajetModel trajetId) {
-		this.trajetId = trajetId;
+	public void setTrajet(TrajetModel trajet) {
+		this.trajet = trajet;
 	}
 
 	public MessageModel(long idMessage, String message, UserModel userId, TrajetModel trajetId) {

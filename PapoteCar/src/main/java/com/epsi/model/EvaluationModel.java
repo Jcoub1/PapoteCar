@@ -1,11 +1,12 @@
 package com.epsi.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name = "Evaluation")
@@ -22,10 +23,10 @@ public class EvaluationModel {
 	@Column(name = "commentaire", nullable = false, unique = false)
 	private String commentaire;
 
-	@OneToOne(mappedBy = "idTrajet")
+	@ManyToOne(cascade = CascadeType.ALL)
 	private TrajetModel trajetId;
 
-	@OneToOne(mappedBy = "idUser")
+	@ManyToOne(cascade = CascadeType.ALL)
 	private UserModel userId;
 
 	public long getIdEvaluation() {

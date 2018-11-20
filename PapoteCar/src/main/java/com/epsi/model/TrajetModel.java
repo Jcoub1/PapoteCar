@@ -6,10 +6,14 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Table(name = "Trajet")
@@ -20,13 +24,14 @@ public class TrajetModel {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idTrajet;
 
-	@OneToOne(mappedBy = "idCIty")
+	@ManyToOne(fetch = FetchType.LAZY)
 	private CityModel depart;
 
-	@OneToOne(mappedBy = "idCIty")
+	@ManyToOne(fetch = FetchType.LAZY)
 	private CityModel arrive;
 
-	@OneToOne(mappedBy = "idCIty")
+	@ManyToMany
+	@JoinTable(name = "CUST_PHONES")
 	private List<CityModel> etapes = new ArrayList<>();
 
 	@Column(name = "horaire", nullable = false, unique = false)
@@ -40,6 +45,12 @@ public class TrajetModel {
 
 	@Column(name = "description", nullable = false, unique = false)
 	private String description;
+
+	@OneToMany(mappedBy = "trajet")
+	private List<MessageModel> message;
+
+	@OneToMany(mappedBy = "idEvaluation")
+	private List<EvaluationModel> eval;
 
 	public long getIdTrajet() {
 		return idTrajet;
