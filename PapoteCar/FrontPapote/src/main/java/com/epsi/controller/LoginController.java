@@ -27,7 +27,7 @@ public class LoginController {
 		String currentPrincipalName = authentication.getName();
 
 		if (currentPrincipalName != "anonymousUser") {
-			return new ModelAndView("redirect:/projet");
+			return new ModelAndView("redirect:/home");
 		}
 
 		return new ModelAndView("login");
